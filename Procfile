@@ -1,0 +1,1 @@
+web: gunicorn team40.wsgi
