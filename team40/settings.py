@@ -93,7 +93,7 @@ if not DEBUG:
    
 
     'default': dj_database_url.config(
-        default ='postgresql://postgres:postgres@localhost:5432/statballerz',
+        default ='postgresql://statz:password@localhost:5432/statballerz',
         conn_max_age=600
     )
     # 'default': {
