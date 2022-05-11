@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default ='django-insecure-&t7gf24-k(i0+grs9e#y2avs6bn9zh3-o%2!$9_dtww))yi-q&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG =  'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
@@ -105,19 +105,19 @@ if not DEBUG:
     #     'PORT': '5432',
     # }
 }
-else:
-    DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'statballerz',
-        'USER': "statz",
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+# else:
+#     DATABASES = {
+#         'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'statballerz',
+#         'USER': "statz",
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
 
 
-    }
-    }
+#     }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
