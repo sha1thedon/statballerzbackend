@@ -86,16 +86,16 @@ WSGI_APPLICATION = 'team40.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if not DEBUG:
-    import dj_database_url
+import dj_database_url
 
-    DATABASES = {
-   
-
-    'default': dj_database_url.config(
-        default ='postgresql://statz:password@localhost:5432/statballerz',
-        conn_max_age=600
+DATABASES = {
+    "default": dj_database_url.config(
+        default="postgresql://postgres:postgres@localhost:5432/statballerz",
+        conn_max_age=600,
     )
+}
+
+DATABASES["default"]['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     'NAME': 'statballerz',
@@ -104,7 +104,10 @@ if not DEBUG:
     #     'HOST': 'localhost',
     #     'PORT': '5432',
     # }
-}
+
+
+    
+    
 # else:
 #     DATABASES = {
 #         'default': {
