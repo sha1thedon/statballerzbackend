@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from ast import If, Not
 from pathlib import Path
 from pickle import FALSE
+
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&t7gf24-k(i0+grs9e#y2avs6bn9zh3-o%2!$9_dtww))yi-q&'
+SECRET_KEY = os.environ.get('SECRET_KEY', default ='django-insecure-&t7gf24-k(i0+grs9e#y2avs6bn9zh3-o%2!$9_dtww))yi-q&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = FALSE
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['statballerzbackend.onrender.com', '127.0.0.1', 'https://statballerzbackend.onrender.com/']
+ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -78,17 +86,38 @@ WSGI_APPLICATION = 'team40.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+if not DEBUG:
+    import dj_database_url
+
+    DATABASES = {
+   
+
+    'default': dj_database_url.config(
+        default ='postgresql://postgres:postgres@localhost:5432/statballerz',
+        conn_max_age=600
+    )
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'statballerz',
+    #     'USER': "statz",
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
+}
+else:
+    DATABASES = {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'statballerz',
         'USER': "statz",
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',
-    }
-}
 
+
+    }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
