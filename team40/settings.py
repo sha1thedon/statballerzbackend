@@ -89,9 +89,14 @@ WSGI_APPLICATION = 'team40.wsgi.application'
 
 import dj_database_url
 
+PRODUCTION = 'RENDER' in os.environ
+
+dev_url = "postgresql://statz:password@localhost:5432/statballerz"
+render_com_url = "postgresql://statz:7szxEutYB8b8PlVgOynn5WY2SaMlmYT7@dpg-c9u4l1c41ls2hdfb9p1g-a:5432/statballerz"
+
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://statz:7szxEutYB8b8PlVgOynn5WY2SaMlmYT7@dpg-c9u4l1c41ls2hdfb9p1g-a:5432/statballerz",
+        default= render_com_url if PRODUCTION else dev_url,
         conn_max_age=600,
     )
 }
