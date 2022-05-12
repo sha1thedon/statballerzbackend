@@ -91,7 +91,7 @@ import dj_database_url
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://statz:password@dpg-c9u4l1c41ls2hdfb9p1g-a:5432/statballerz",
+        default="postgresql://statz:7szxEutYB8b8PlVgOynn5WY2SaMlmYT7@dpg-c9u4l1c41ls2hdfb9p1g-a:5432/statballerz",
         conn_max_age=600,
     )
 }
